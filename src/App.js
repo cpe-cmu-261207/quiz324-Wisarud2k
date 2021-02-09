@@ -14,15 +14,17 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(pet));
-  }, [pet]);
+  }, pet);
 
   const addform = () => {
     //e.preventdefault();
 
     if (input.name !== "" && input.gender !== "" && input.age !== "") {
-      setPet(pet.push(input));
+      setPet(() => {
+        pet.push(input);
+      });
       setInput({ name: "", gender: "", age: "" });
-      //console.log(pet);
+      console.log(pet);
     }
   };
   return (
@@ -80,9 +82,9 @@ function App() {
         <p className="is-4 title has-text-centered">Pet List</p>
         {/* sample table */}
 
-        {/* {pet.map((item) => (
-          <ItemTable props={item} />
-        ))} */}
+        {pet.map((item) => {
+          <ItemTable props={item} />;
+        })}
         {/* {pet.map((item) => (
           console.log("test")
         ))} */}
